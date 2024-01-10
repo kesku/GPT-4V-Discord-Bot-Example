@@ -1,0 +1,5 @@
+py-cord
+openai
+opencv-python-headless # You can use opencv-python if you want, but it's unnecessary for this project
+requests
+python-dotenv
