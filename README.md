@@ -11,7 +11,7 @@ https://github.com/kesku/GPT-4V-Discord-Bot-Example/assets/62210496/058564a0-ef8
 - Every message sent in the chat is passed to the OpenAI model,
 - Handles image attachments in formats including PNG, JPG, JPEG, and WEBP.
 - Processes video attachments, extracting frames from MP4, MOV, and WEBM files.
-- Will never max out model token limit by havng too may messages, as messages are handled seperately from one another.
+- Will never max out model token limit in a discord conversation, as messages are handled seperately from one another.
 
 ## Requirements
 
