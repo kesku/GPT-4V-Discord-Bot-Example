@@ -49,37 +49,54 @@ class Bot(discord.Client):
                     attachment.filename.lower().endswith(ext)
                     for ext in [".mp4", ".mov", ".webm"]
                 ):
-                    video_url = attachment.url
-                    video_data = requests.get(video_url).content
-                    temp_video_path = "temp_video_scan.mp4"
-                    with open(temp_video_path, "wb") as scan_file:
-                        scan_file.write(video_data)
-                    video_stream = cv2.VideoCapture("temp_video_scan.mp4")
-                    fps = video_stream.get(cv2.CAP_PROP_FPS)
-                    print(f"Video FPS: {fps}")
-                    # List to store base64 encoded frames
-                    base64Frames = []
-                    # Read frames from the video file and encode them as base64
-                    while video_stream.isOpened():
-                        success, frame = video_stream.read()
-                        if not success:
-                            # Stop if no frame is found
-                            break
-                        _, buffer = cv2.imencode(".jpg", frame)
-                        base64Frames.append(base64.b64encode(buffer).decode("utf-8"))
-                    print(f"{len(base64Frames)} frames read.")
-                    video_stream.release()
-                    os.remove(temp_video_path)
-                    # Process every 25th frame (to reduce the number of frames processed)
-                    for x in base64Frames[0::25]:   
-                        base64_image_url = f"{base64_prefix}{x}" 
-                        content.append(
-                            {
-                                "type": "image_url",
-                                "image_url": {"url": base64_image_url},
-                            }
-                        )
+                    type = "video"
+                elif any(
+                    attachment.filename.lower().endswith(ext)
+                    for ext in [".gif", ".vgif"]
+                ):
+                    type = "gif"
 
+                print(
+                    f"Processing {attachment.filename}\n URL: {attachment.url}\n Type: {type}"
+                )
+                video_url = attachment.url
+                video_data = requests.get(video_url).content
+                temp_video_path = "temp_video_scan.mp4"
+                with open(temp_video_path, "wb") as scan_file:
+                    scan_file.write(video_data)
+                video_stream = cv2.VideoCapture("temp_video_scan.mp4")
+                fps = video_stream.get(cv2.CAP_PROP_FPS)
+                print(f"Video FPS: {fps}")
+                # List to store base64 encoded frames
+                base64Frames = []
+                # Read frames from the video file and encode them as base64
+                while video_stream.isOpened():
+                    success, frame = video_stream.read()
+                    if not success:
+                        # Stop if no frame is found
+                        break
+                    _, buffer = cv2.imencode(".jpg", frame)
+                    base64Frames.append(base64.b64encode(buffer).decode("utf-8"))
+                print(f"{len(base64Frames)} frames read.")
+                video_stream.release()
+                os.remove(temp_video_path)
+                frame_limit = base64Frames
+                if type == "video":
+                    # Process every 25th frame (to reduce the number of frames processed)
+                    frame_limit = base64Frames[0::25]
+                elif type == "gif":
+                    # Usually need to limit number of processed frames for a GIF
+                    frame_limit = base64Frames
+                else:
+                    frame_limit = base64Frames[0::25]
+                for x in frame_limit:
+                    base64_image_url = f"{base64_prefix}{x}"
+                    content.append(
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": base64_image_url},
+                        }
+                    )
         try:
             # Send the user message to the OpenAI API for completion
             response = client.chat.completions.create(
@@ -98,8 +115,8 @@ class Bot(discord.Client):
 
 
 # Create instance of the Discord bot
-intents = discord.Intents.all()
+intents = discord.Intents.default()
+intents.message_content = True
 bot = Bot(intents=intents)
-
 # Run the Discord bot with provided token
 bot.run(DISCORD_TOKEN)
