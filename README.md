@@ -18,7 +18,7 @@ https://github.com/kesku/GPT-4V-Discord-Bot-Example/assets/62210496/058564a0-ef8
 The following libraries and environments are required:
 
 - Python 3.x
-- [Pycord](https://docs.pycord.dev/en/stable/installing.html)
+- [Nextcord](https://docs.nextcord.dev/en/stable/)
 - [OpenAI Python Library](https://github.com/openai/openai-python)
 - [OpenCV (cv2)](https://github.com/opencv/opencv-python)
 - [requests](https://github.com/psf/requests)
