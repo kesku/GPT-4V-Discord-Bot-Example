@@ -1,4 +1,4 @@
-# A simple Discord bot showing how to use `gpt-4-vision-preview` via the [chat completions API](https://platform.openai.com/docs/api-reference/chat/create)
+# A simple Discord bot showing how to use GPT-4's [Vision](https://platform.openai.com/docs/guides/vision/vision) to understand videos
 
 ## Overview
 
