@@ -111,7 +111,7 @@ class Bot(nextcord.Client):
         try:
             # Send the user message to the OpenAI API for completion
             response = client.chat.completions.create(
-                model="gpt-4-vision-preview",
+                model="gpt-4-turbo",
                 messages=[{"role": "user", "content": content}],
                 max_tokens=1000,
             )
