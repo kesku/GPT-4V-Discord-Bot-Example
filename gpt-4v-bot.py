@@ -88,12 +88,12 @@ class Bot(nextcord.Client):
                 os.remove(temp_video_path)
                 frame_limit = base64Frames
                 if type == "video":
-                    percentage_to_process = 40  # 40%
+                    percentage_to_process = 50  # 25%
                     frames_to_process = len(base64Frames) * (
                         percentage_to_process / 100
                     )
                     frame_interval = int(len(base64Frames) / frames_to_process)
-                    # Process every 25th frame (to reduce the number of frames processed)
+                    # Process a quarter of the frames
                     frame_limit = base64Frames[0::frame_interval]
                 elif type == "gif":
                     # Usually need to limit number of processed frames for a GIF
