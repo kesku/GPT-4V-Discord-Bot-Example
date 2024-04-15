@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains a simple Discord bot demonstrating the use of [GPT-4 Vision (GPT-4V)](https://platform.openai.com/docs/guides/vision) with the OpenAI API. It can process text, images, and videos (passing every 25th frame of the video).
+This repository contains a simple Discord bot demonstrating the use of [GPT-4 Vision (GPT-4V)](https://platform.openai.com/docs/guides/vision) with the OpenAI API. It can process text, images, and videos (passing 25% of the frames from a video).
 
 https://github.com/kesku/GPT-4V-Discord-Bot-Example/assets/62210496/058564a0-ef84-4483-af55-55df63dd5ecf
 
