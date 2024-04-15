@@ -88,7 +88,7 @@ class Bot(nextcord.Client):
                 os.remove(temp_video_path)
                 frame_limit = base64Frames
                 if type == "video":
-                    percentage_to_process = 50  # 25%
+                    percentage_to_process = 25  # 25%
                     frames_to_process = len(base64Frames) * (
                         percentage_to_process / 100
                     )
