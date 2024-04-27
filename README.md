@@ -1,24 +1,26 @@
-# A simple Discord bot showing how to use `gpt-4-vision-preview` via the [chat completions API](https://platform.openai.com/docs/api-reference/chat/create)
+# A simple Discord bot showing how to use GPT-4's [Vision](https://platform.openai.com/docs/guides/vision/vision) to understand videos
 
 ## Overview
 
-This repository contains a simple Discord bot demonstrating the use of [GPT-4 Vision (GPT-4V)](https://platform.openai.com/docs/guides/vision) with the OpenAI API. It can process text, images, and videos (passing every 25th frame of the video).
+This repository contains a simple Discord bot demonstrating the use of [GPT-4 Vision (GPT-4V)](https://platform.openai.com/docs/guides/vision) with the OpenAI API. It can process text, images, and videos (passing 25% of the frames from a video).
 
 https://github.com/kesku/GPT-4V-Discord-Bot-Example/assets/62210496/058564a0-ef84-4483-af55-55df63dd5ecf
 
 ## Features
 
-- Every message sent in the chat is passed to the OpenAI model,
 - Handles image attachments in formats including PNG, JPG, JPEG, and WEBP.
 - Processes video attachments, extracting frames from MP4, MOV, and WEBM files.
 - Will never max out model token limit in a discord conversation, as messages are handled seperately from one another.
+
+## NOTE:
+### This repository is a proof of concept and is not intended to be used as-is for any deployment. I would highly recommend modifying this code to bring more functionality out of any Discord Bot you're planning to make with this.
 
 ## Requirements
 
 The following libraries and environments are required:
 
 - Python 3.x
-- [Pycord](https://docs.pycord.dev/en/stable/installing.html)
+- [Nextcord](https://docs.nextcord.dev/en/stable/)
 - [OpenAI Python Library](https://github.com/openai/openai-python)
 - [OpenCV (cv2)](https://github.com/opencv/opencv-python)
 - [requests](https://github.com/psf/requests)
